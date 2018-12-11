@@ -13,4 +13,3 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Run JSON Server
 
  go inside app folder and Run `json-server --watch product.json` .
-
