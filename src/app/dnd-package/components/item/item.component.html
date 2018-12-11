@@ -1,0 +1,39 @@
+<ng-container [ngSwitch]="type" class="myclass">
+  <div (mouseover)="showIcons = true" (mouseleave)="showIcons = false" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
+    <div style="height: 20px;" *ngIf="position === 'canvas'" class="overlay">
+      <i class="fa fa-times iconStyle" style="font-size: 13px" *ngIf="position === 'canvas' && showIcons" (click)="destroyComponent()"></i>
+      <i class="fa fa-arrows iconStyle" style="font-size: 11px; margin-right: 5px" *ngIf="position === 'canvas' && showIcons"></i>
+      <i class="fa fa-cog iconStyle" style="font-size: 11px; margin-right: 10px" *ngIf="position === 'canvas' && showIcons" (click)="openPropertyPanel()"></i>
+    </div>
+
+    <ng-container *ngSwitchCase="'array'">
+      <ngx-dnd-container [model]="model" [template]="container.template" [dropZone]="dropZone" [dropZones]="dropZones" [removeOnSpill]="removeOnSpill"
+        [droppableItemClass]="droppableItemClass" [copy]="copy">
+      </ngx-dnd-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'object'">
+      <ng-template *ngIf="container.template" [ngTemplateOutlet]="container.template" [ngTemplateOutletContext]="data">
+      </ng-template>
+      <ng-container *ngIf="!container.template">
+        <div class="ngx-dnd-content">
+          {{model.label}}
+        </div>
+        <ngx-dnd-container *ngIf="model.children" [model]="model.children" [template]="container.template" [dropZone]="dropZone"
+          [dropZones]="dropZones" [removeOnSpill]="removeOnSpill" [droppableItemClass]="droppableItemClass" [copy]="copy" [position]="position">
+        </ngx-dnd-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'undefined'">
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <ng-template *ngIf="container.template" [ngTemplateOutlet]="container.template" [ngTemplateOutletContext]="data">
+      </ng-template>
+      <div *ngIf="!container.template" class="ngx-dnd-content">
+        {{model}}
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

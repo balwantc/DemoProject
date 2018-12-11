@@ -1,0 +1,14 @@
+<div class="row">
+  <div *ngFor="let item of chartTypeList" >
+    <div class="col-4">
+        <label >
+            <input type="radio" name="optradio" [checked]="item.name==='Bar'? true:false" (click)="clickedData(item.value)">{{item.name}}
+          </label>
+    </div>
+  </div>
+  <div style="display: block" class="col-8">
+    <canvas baseChart [datasets]="chartDetails.chartData" [labels]="chartDetails.chartLabels" [options]="chartDetails.chartOptions"
+      [legend]="chartDetails.chartLegend" [chartType]="chartDetails.chartType">
+    </canvas>
+  </div>
+</div>

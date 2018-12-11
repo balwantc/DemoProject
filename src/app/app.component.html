@@ -1,0 +1,34 @@
+<div class="builder-container" class="row" style="border:2px solid black;height:100vh;width:100%">
+  <div class="builder-source" class="col-4" style="border-right:2px solid black">
+    <h4>Source</h4>
+
+    <ngx-dnd-container class="root-container" [model]="sourceBuilderTools" [dropZones]="['builder-target']" [copy]="true"
+      [droppableItemClass]="droppableItemClass" (drag)="builderDrag($event)">
+
+      <ng-template let-item="model">
+        <i [class]="item.icon"></i>
+        {{item.name}}
+      </ng-template>
+    </ngx-dnd-container>
+
+    <div>
+      <h3>Model</h3>
+      <pre><code>{{targetBuilderTools | json}}</code></pre>
+    </div>
+
+  </div>
+  <div class="builder-target" class="col-8">
+    <h4>Target</h4>
+
+    <ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true"
+      [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="log($event)" (over)="log($event)" (out)="log($event)"
+      (remove)="log($event)">
+
+      <ng-template let-model="model" let-template="template">
+        <app-container [properties]="model"></app-container>
+      </ng-template>
+    </ngx-dnd-container>
+
+  </div>
+</div>
+<!-- <app-chart></app-chart> -->

@@ -1,0 +1,22 @@
+<div style="min-height:100px;max-height:500px;overflow:auto">
+  <p>Click on BitCoin to get latest feeds.</p>
+  <button style="margin-bottom: 20px" type="submit" class="btn btn-primary" (click)="getRssResult()">BitCoin</button>
+  <div class=loader *ngIf="loading && clicked" >
+
+  </div>
+  <div *ngIf="!loading" style="margin-top:10px">
+    <div *ngFor="let item of feedResult.articles">
+      <div class="card" style="width: 100%;">
+
+        <div class="card-body">
+          <img class="card-img-top" src={{item.urlToImage}} alt="Card image cap" style="height:100px;width:100px;float:right">
+          <a class="card-title" target="_blank" href={{item.url}} >{{item.title}}</a>
+          <p class="card-text">{{item.publishedAt}}</p>
+          <p class="card-text"><b>author: </b>{{item.author}}</p>
+          <p class="card-text"><b>source: </b>{{item.source.name}}</p>
+          <p class="card-text">{{item.content}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
